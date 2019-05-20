@@ -15,7 +15,7 @@ export const upsert = (
   table: string,
   object: any,
   constraint: string | string[]
-) => {
+): any => {
   const insert = knex(table).insert(object)
   const update = knex.queryBuilder().update(object)
   const constraintStr =

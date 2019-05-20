@@ -4,7 +4,7 @@ import { join } from 'path'
 import City from './City'
 
 import { SCHEMA_JOIN as SCHEMA } from '../constants'
-console.log(SCHEMA)
+
 export default class Country extends Model {
   readonly id!: number
   name: string

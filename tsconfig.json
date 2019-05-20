@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "pretty": true,
+    "sourceMap": true,
+    "target": "esnext",
+    "outDir": "./build",
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "typeRoots": ["build/types"],
+    "declaration": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts"]
+}

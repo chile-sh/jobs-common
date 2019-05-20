@@ -3,18 +3,16 @@
   "version": "1.1.0",
   "license": "GPL-3.0",
   "files": [
-    "lib",
-    "models",
-    "config.ts",
-    "constants.ts",
-    "knexfile.ts"
+    "build"
   ],
   "scripts": {
     "ts-node": "node -r tsconfig-paths/register -r ts-node/register",
-    "test": "yarn lint && jest",
+    "build": "rm -rvf build && tsc",
+    "test": "yarn lint",
     "test:watch": "jest --watch",
-    "lint": "eslint '**/*.@(ts|js|tsx|jsx)'",
-    "lint:fix": "yarn lint --fix"
+    "lint": "eslint 'src/**/*.@(ts|js|tsx|jsx)'",
+    "lint:fix": "yarn lint --fix",
+    "version": "yarn build && git add build"
   },
   "devDependencies": {
     "@chile-sh/eslint-config-ts": "^2.2.0",
