@@ -1,0 +1,51 @@
+{
+  "name": "jobs-common",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "files": [
+    "lib",
+    "models",
+    "config.ts",
+    "constants.ts",
+    "knexfile.ts"
+  ],
+  "scripts": {
+    "ts-node": "node -r tsconfig-paths/register -r ts-node/register",
+    "test": "yarn lint && jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint '**/*.@(ts|js|tsx|jsx)'",
+    "lint:fix": "yarn lint --fix"
+  },
+  "devDependencies": {
+    "@chile-sh/eslint-config-ts": "^2.2.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/ioredis": "^4.0.10",
+    "@types/jest": "^24.0.12",
+    "@types/lodash": "^4.14.123",
+    "@types/node": "^12.0.0",
+    "@types/winston": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.0",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "@sentry/node": "5.1.0",
+    "@types/ms": "^0.7.30",
+    "amqplib": "^0.5.3",
+    "dotenv": "^7.0.0",
+    "ioredis": "^4.9.0",
+    "knex": "^0.16.5",
+    "lodash": "^4.17.11",
+    "ms": "^2.1.1",
+    "objection": "^1.6.8",
+    "pg": "^7.10.0",
+    "winston": "^3.2.1"
+  }
+}
