@@ -1,5 +1,5 @@
 {
-  "name": "jobs-common",
+  "name": "@chile-sh/jobs-common",
   "version": "1.0.0",
   "license": "GPL-3.0",
   "files": [
