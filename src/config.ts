@@ -2,6 +2,7 @@ const local = '127.0.0.1'
 
 const {
   NODE_ENV = 'development',
+  PROJECT_NAME = 'jobs',
   SENTRY_DSN,
   REDIS_HOST = local,
   REDIS_PASS,
@@ -18,6 +19,15 @@ const {
 export default {
   env: NODE_ENV,
   isProd: NODE_ENV === 'production',
+  projectName: PROJECT_NAME,
+
+  // DigitalOcean Spaces
+  aws: {
+    s3: {
+      endpoint: 'sfo2.digitaloceanspaces.com',
+      bucket: 'chile-sh'
+    }
+  },
 
   sentry: {
     dsn: SENTRY_DSN
