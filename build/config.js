@@ -1,10 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const local = '127.0.0.1';
-const { NODE_ENV = 'development', SENTRY_DSN, REDIS_HOST = local, REDIS_PASS, REDIS_PREFIX, RMQ_HOST = local, RMQ_USER, RMQ_PASS, PG_HOST = local, PG_USER, PG_PASS, DB_NAME = 'jobs' } = process.env;
+const { NODE_ENV = 'development', PROJECT_NAME = 'jobs', SENTRY_DSN, REDIS_HOST = local, REDIS_PASS, REDIS_PREFIX, RMQ_HOST = local, RMQ_USER, RMQ_PASS, PG_HOST = local, PG_USER, PG_PASS, DB_NAME = 'jobs' } = process.env;
 exports.default = {
     env: NODE_ENV,
     isProd: NODE_ENV === 'production',
+    projectName: PROJECT_NAME,
+    // DigitalOcean Spaces
+    aws: {
+        s3: {
+            endpoint: 'sfo2.digitaloceanspaces.com',
+            bucket: 'chile-sh'
+        }
+    },
     sentry: {
         dsn: SENTRY_DSN
     },

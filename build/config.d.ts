@@ -1,6 +1,13 @@
 declare const _default: {
     env: string;
     isProd: boolean;
+    projectName: string;
+    aws: {
+        s3: {
+            endpoint: string;
+            bucket: string;
+        };
+    };
     sentry: {
         dsn: string;
     };
