@@ -16,16 +16,18 @@ const {
   DB_NAME = 'jobs'
 } = process.env
 
+const isProd = NODE_ENV === 'production'
+
 export default {
   env: NODE_ENV,
-  isProd: NODE_ENV === 'production',
+  isProd,
   projectName: PROJECT_NAME,
 
   // DigitalOcean Spaces
   aws: {
     s3: {
       endpoint: 'sfo2.digitaloceanspaces.com',
-      bucket: 'chile-sh'
+      bucket: isProd ? 'chile-sh' : 'chile-sh-dev'
     }
   },
 
