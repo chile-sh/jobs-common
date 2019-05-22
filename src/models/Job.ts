@@ -25,7 +25,7 @@ export default class Job extends Model {
   company: Company
   category: Category
   tags?: Tag[]
-  city: City
+  city?: City
 
   static tableName = SCHEMA.jobs.__tableName
 
