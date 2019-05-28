@@ -5,8 +5,10 @@ import { logError } from './logger'
 import { toSeconds } from './helpers'
 
 interface CustomRedis extends Redis.Redis {
-  hsetJson?(key: string, field: string, val: any): Promise<any>
+  getJson?(key: string): Promise<any>
+  setJson?(key: string, val: any): Promise<any>
   hgetJson?(key: string, field: string): Promise<any>
+  hsetJson?(key: string, field: string, val: any): Promise<any>
   setKeyExp?(
     key: string,
     timeStr: string | number,
@@ -15,7 +17,17 @@ interface CustomRedis extends Redis.Redis {
   ): Promise<any>
 }
 
-const createClient = (opts = {}): CustomRedis => {
+const tryParse = (str: string) => {
+  if (!str) return str
+
+  try {
+    return JSON.parse(str)
+  } catch (err) {
+    return str
+  }
+}
+
+export const createClient = (opts = {}): CustomRedis => {
   const { prefix } = config.redis
   const client: CustomRedis = new Redis({
     host: config.redis.host,
@@ -25,19 +37,14 @@ const createClient = (opts = {}): CustomRedis => {
     ...opts
   })
 
+  client.setJson = (key, val) => client.set(key, JSON.stringify(val))
+  client.getJson = async key => tryParse(await client.get(key))
+
   client.hsetJson = (key, field, val) =>
     client.hset(key, field, JSON.stringify(val))
 
-  client.hgetJson = async (key, field) => {
-    const str = await client.hget(key, field)
-    if (!str) return str
-
-    try {
-      return JSON.parse(str)
-    } catch (err) {
-      return str
-    }
-  }
+  client.hgetJson = async (key, field) =>
+    tryParse(await client.hget(key, field))
 
   /**
    * Set expiration in seconds for a given redis key
