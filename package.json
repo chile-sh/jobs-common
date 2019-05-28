@@ -6,13 +6,17 @@
     "build"
   ],
   "scripts": {
-    "ts-node": "node -r tsconfig-paths/register -r ts-node/register",
+    "ts-node": "node -r dotenv/config -r ts-node/register",
     "build": "rm -rvf build && tsc",
     "test": "yarn lint",
     "test:watch": "jest --watch",
     "lint": "eslint 'src/**/*.@(ts|js|tsx|jsx)'",
     "lint:fix": "yarn lint --fix",
-    "version": "yarn build && git add build"
+    "version": "yarn build && git add build",
+    "knex": "yarn ts-node node_modules/.bin/knex --cwd src --knexfile knexfile.ts",
+    "db:migrate": "yarn knex migrate:latest",
+    "db:rollback": "yarn knex migrate:rollback",
+    "db:seed": "yarn knex seed:run"
   },
   "devDependencies": {
     "@chile-sh/eslint-config-ts": "^2.2.2",
@@ -20,10 +24,11 @@
     "@types/ioredis": "^4.0.10",
     "@types/jest": "^24.0.12",
     "@types/lodash": "^4.14.123",
-    "@types/node": "^12.0.0",
+    "@types/node": "^12.0.2",
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
+    "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",

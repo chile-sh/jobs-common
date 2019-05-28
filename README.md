@@ -1,4 +1,5 @@
 # jobs-common
+
 Common helpers, configs, and constants used across the Jobs project
 
 ## Install
@@ -8,6 +9,10 @@ yarn add @chile-sh/jobs-common
 ```
 
 ## Env variables
+
+`PG_HOST`, `PG_USER`, and `PG_PASS` are required to run migrations.
+
+Other env variables should be inherited from outside.
 
 ```conf
 NODE_ENV=development
@@ -38,6 +43,40 @@ nano ~/.aws/credentials
 [default]
 aws_access_key_id=...
 aws_secret_access_key=...
+```
+
+## Database
+
+Use knex with:
+
+```bash
+yarn knex
+```
+
+e.g:
+```bash
+yarn knex seed:make getonbrd -x ts # use TypeScript
+```
+
+### Migrations
+
+```bash
+yarn db:migrate && yarn db:seed
+
+yarn db:rollback
+```
+
+## Development
+
+```bash
+yarn global add yalc
+
+yarn build && yalc publish
+```
+
+Then, on the external project:
+```bash
+yalc link @chile-sh/jobs-common
 ```
 
 # License
