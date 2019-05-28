@@ -24,6 +24,9 @@ const makeDbSchema = (joinColumns?: boolean) => {
       slug: 'slug',
       level: 'level',
       type: 'type',
+      sourceId: 'source_id',
+      isClosed: 'is_closed',
+      salaryFromMap: 'salary_from_map',
       salaryFrom: 'salary_from',
       salaryTo: 'salary_to',
       salariesHistory: 'salaries_history',
@@ -57,7 +60,25 @@ const makeDbSchema = (joinColumns?: boolean) => {
       processFinishedAt: 'process_finished_at',
       info: 'info',
       errors: 'errors',
-      version: 'version'
+      version: 'version',
+      sourceId: 'source_id',
+      current: 'current'
+    },
+    sources: {
+      __tableName: 'sources',
+      id,
+      name: 'name',
+      slug: 'slug',
+      url: 'url',
+      logo: 'logo'
+    },
+    assets: {
+      __tableName: 'assets',
+      id,
+      __timestamps: true,
+      mimetype: 'mimetype',
+      filename: 'filename',
+      path: 'path'
     },
     tags: {
       __tableName: 'tags',
@@ -93,3 +114,12 @@ const makeDbSchema = (joinColumns?: boolean) => {
 
 export const SCHEMA = makeDbSchema()
 export const SCHEMA_JOIN = makeDbSchema(true)
+
+export const SOURCES = {
+  getonbrd: {
+    id: 1,
+    name: 'GetOnBoard',
+    slug: 'getonbrd',
+    url: 'https://www.getonbrd.com'
+  }
+}

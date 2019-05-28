@@ -5,6 +5,7 @@ import Company from './Company'
 import Category from './Category'
 import Tag from './Tag'
 import City from './City'
+import Source from './Source'
 
 import { SCHEMA_JOIN as SCHEMA } from '../constants'
 
@@ -14,8 +15,10 @@ export default class Job extends Model {
   slug: string
   level?: string
   type: string
+  isClosed?: boolean
   salaryFrom?: number
   salaryTo?: number
+  salaryFromMap?: boolean
   salariesHistory?: { date: Date; range: [number, number] }[] | string
   publishedAt: Date
   description: string
@@ -26,10 +29,20 @@ export default class Job extends Model {
   category: Category
   tags?: Tag[]
   city?: City
+  source: Source
 
   static tableName = SCHEMA.jobs.__tableName
 
   static relationMappings = () => ({
+    source: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: join(__dirname, 'Source'),
+      join: {
+        from: SCHEMA.jobs.sourceId,
+        to: SCHEMA.sources.id
+      }
+    },
+
     city: {
       relation: Model.BelongsToOneRelation,
       modelClass: join(__dirname, 'City'),

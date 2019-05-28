@@ -11,7 +11,7 @@ export default class Company extends Model {
   slug: string
   shortDescription?: string
   description?: string
-  logo?: string
+  logo?: number
   meta?: {}
 
   jobs?: Job[]
