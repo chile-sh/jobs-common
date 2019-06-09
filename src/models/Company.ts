@@ -2,8 +2,7 @@ import { Model } from 'objection'
 import { join } from 'path'
 
 import Job from './Job'
-
-import { SCHEMA_JOIN as SCHEMA } from '../constants'
+import Asset from './Asset'
 
 export default class Company extends Model {
   readonly id!: number
@@ -11,20 +10,29 @@ export default class Company extends Model {
   slug: string
   shortDescription?: string
   description?: string
-  logo?: number
   meta?: {}
+  logo?: number
 
+  logoAsset?: Asset
   jobs?: Job[]
 
-  static tableName = SCHEMA.companies.__tableName
+  static tableName = 'companies'
 
   static relationMappings = () => ({
+    logoAsset: {
+      relation: Model.HasOneRelation,
+      modelClass: join(__dirname, 'Asset'),
+      join: {
+        from: 'companies.logo',
+        to: 'assets.id'
+      }
+    },
     jobs: {
       relation: Model.HasManyRelation,
       modelClass: join(__dirname, 'Job'),
       join: {
-        from: SCHEMA.companies.id,
-        to: SCHEMA.jobs.companyId
+        from: 'companies.id',
+        to: 'jobs.company_id'
       }
     }
   })

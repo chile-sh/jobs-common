@@ -17,10 +17,12 @@ const {
 } = process.env
 
 const isProd = NODE_ENV === 'production'
+const isDev = NODE_ENV === 'development'
 
 export default {
   env: NODE_ENV,
   isProd,
+  isDev,
   projectName: PROJECT_NAME,
 
   // DigitalOcean Spaces

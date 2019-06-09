@@ -3,8 +3,6 @@ import { join } from 'path'
 
 import Job from './Job'
 
-import { SCHEMA_JOIN as SCHEMA } from '../constants'
-
 export default class Category extends Model {
   readonly id!: number
   name: string
@@ -12,15 +10,15 @@ export default class Category extends Model {
 
   jobs?: Job[]
 
-  static tableName = SCHEMA.categories.__tableName
+  static tableName = 'categories'
 
   static relationMappings = () => ({
     jobs: {
       relation: Model.HasManyRelation,
       modelClass: join(__dirname, 'Job'),
       join: {
-        from: SCHEMA.categories.id,
-        to: SCHEMA.jobs.categoryId
+        from: 'categories.id',
+        to: 'jobs.category_id'
       }
     }
   })

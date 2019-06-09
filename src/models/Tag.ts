@@ -3,26 +3,24 @@ import { join } from 'path'
 
 import Job from './Job'
 
-import { SCHEMA_JOIN as SCHEMA } from '../constants'
-
 export default class Tag extends Model {
   readonly id!: number
   name: string
   jobs: Job[]
 
-  static tableName = SCHEMA.tags.__tableName
+  static tableName = 'tags'
 
   static relationMappings = () => ({
     jobs: {
       relation: Model.ManyToManyRelation,
       modelClass: join(__dirname, 'Job'),
       join: {
-        from: SCHEMA.tags.id,
+        from: 'tags.id',
         through: {
-          from: SCHEMA.jobsTags.jobId,
-          to: SCHEMA.jobsTags.tagId
+          from: 'jobs_tags.job_id',
+          to: 'jobs_tags.tag_id'
         },
-        to: SCHEMA.jobs.id
+        to: 'jobs.id'
       }
     }
   })

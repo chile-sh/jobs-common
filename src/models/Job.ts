@@ -7,8 +7,6 @@ import Tag from './Tag'
 import City from './City'
 import Source from './Source'
 
-import { SCHEMA_JOIN as SCHEMA } from '../constants'
-
 export default class Job extends Model {
   readonly id!: number
   title: string
@@ -31,15 +29,15 @@ export default class Job extends Model {
   city?: City
   source: Source
 
-  static tableName = SCHEMA.jobs.__tableName
+  static tableName = 'jobs'
 
   static relationMappings = () => ({
     source: {
       relation: Model.BelongsToOneRelation,
       modelClass: join(__dirname, 'Source'),
       join: {
-        from: SCHEMA.jobs.sourceId,
-        to: SCHEMA.sources.id
+        from: 'jobs.source_id',
+        to: 'sources.id'
       }
     },
 
@@ -47,8 +45,8 @@ export default class Job extends Model {
       relation: Model.BelongsToOneRelation,
       modelClass: join(__dirname, 'City'),
       join: {
-        from: SCHEMA.jobs.cityId,
-        to: SCHEMA.cities.id
+        from: 'jobs.city_id',
+        to: 'cities.id'
       }
     },
 
@@ -56,8 +54,8 @@ export default class Job extends Model {
       relation: Model.BelongsToOneRelation,
       modelClass: join(__dirname, 'Company'),
       join: {
-        from: SCHEMA.jobs.companyId,
-        to: SCHEMA.companies.id
+        from: 'jobs.company_id',
+        to: 'companies.id'
       }
     },
 
@@ -65,12 +63,12 @@ export default class Job extends Model {
       relation: Model.ManyToManyRelation,
       modelClass: join(__dirname, 'Tag'),
       join: {
-        from: SCHEMA.jobs.id,
+        from: 'jobs.id',
         through: {
-          from: SCHEMA.jobsTags.jobId,
-          to: SCHEMA.jobsTags.tagId
+          from: 'jobs_tags.job_id',
+          to: 'jobs_tags.tag_id'
         },
-        to: SCHEMA.tags.id
+        to: 'tags.id'
       }
     },
 
@@ -78,8 +76,8 @@ export default class Job extends Model {
       relation: Model.BelongsToOneRelation,
       modelClass: join(__dirname, 'Category'),
       join: {
-        from: SCHEMA.jobs.categoryId,
-        to: SCHEMA.categories.id
+        from: 'jobs.category_id',
+        to: 'categories.id'
       }
     }
   })
