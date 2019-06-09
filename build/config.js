@@ -3,9 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const local = '127.0.0.1';
 const { NODE_ENV = 'development', PROJECT_NAME = 'jobs', SENTRY_DSN, REDIS_HOST = local, REDIS_PASS, REDIS_PREFIX, RMQ_HOST = local, RMQ_USER, RMQ_PASS, PG_HOST = local, PG_USER, PG_PASS, DB_NAME = 'jobs' } = process.env;
 const isProd = NODE_ENV === 'production';
+const isDev = NODE_ENV === 'development';
 exports.default = {
     env: NODE_ENV,
     isProd,
+    isDev,
     projectName: PROJECT_NAME,
     // DigitalOcean Spaces
     aws: {

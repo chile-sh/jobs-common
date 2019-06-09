@@ -2,21 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const objection_1 = require("objection");
 const path_1 = require("path");
-const constants_1 = require("../constants");
 class Tag extends objection_1.Model {
 }
-Tag.tableName = constants_1.SCHEMA_JOIN.tags.__tableName;
+Tag.tableName = 'tags';
 Tag.relationMappings = () => ({
     jobs: {
         relation: objection_1.Model.ManyToManyRelation,
         modelClass: path_1.join(__dirname, 'Job'),
         join: {
-            from: constants_1.SCHEMA_JOIN.tags.id,
+            from: 'tags.id',
             through: {
-                from: constants_1.SCHEMA_JOIN.jobsTags.jobId,
-                to: constants_1.SCHEMA_JOIN.jobsTags.tagId
+                from: 'jobs_tags.job_id',
+                to: 'jobs_tags.tag_id'
             },
-            to: constants_1.SCHEMA_JOIN.jobs.id
+            to: 'jobs.id'
         }
     }
 });

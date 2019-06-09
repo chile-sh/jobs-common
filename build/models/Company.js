@@ -2,17 +2,24 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const objection_1 = require("objection");
 const path_1 = require("path");
-const constants_1 = require("../constants");
 class Company extends objection_1.Model {
 }
-Company.tableName = constants_1.SCHEMA_JOIN.companies.__tableName;
+Company.tableName = 'companies';
 Company.relationMappings = () => ({
+    logoAsset: {
+        relation: objection_1.Model.HasOneRelation,
+        modelClass: path_1.join(__dirname, 'Asset'),
+        join: {
+            from: 'companies.logo',
+            to: 'assets.id'
+        }
+    },
     jobs: {
         relation: objection_1.Model.HasManyRelation,
         modelClass: path_1.join(__dirname, 'Job'),
         join: {
-            from: constants_1.SCHEMA_JOIN.companies.id,
-            to: constants_1.SCHEMA_JOIN.jobs.companyId
+            from: 'companies.id',
+            to: 'jobs.company_id'
         }
     }
 });

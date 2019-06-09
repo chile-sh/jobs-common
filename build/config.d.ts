@@ -1,6 +1,7 @@
 declare const _default: {
     env: string;
     isProd: boolean;
+    isDev: boolean;
     projectName: string;
     aws: {
         s3: {

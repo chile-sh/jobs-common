@@ -1,19 +1,17 @@
 import { Model } from 'objection';
 import Job from './Job';
-import Asset from './Asset';
-export default class Company extends Model {
+import Snapshot from './Snapshot';
+export default class Source extends Model {
     readonly id: number;
     name: string;
     slug: string;
-    shortDescription?: string;
-    description?: string;
-    meta?: {};
-    logo?: number;
-    logoAsset?: Asset;
-    jobs?: Job[];
+    url: string;
+    logo?: string;
+    jobs: Job[];
+    snapshots: Snapshot[];
     static tableName: string;
     static relationMappings: () => {
-        logoAsset: {
+        jobs: {
             relation: import("objection").Relation;
             modelClass: string;
             join: {
@@ -21,7 +19,7 @@ export default class Company extends Model {
                 to: string;
             };
         };
-        jobs: {
+        snapshots: {
             relation: import("objection").Relation;
             modelClass: string;
             join: {
